@@ -623,6 +623,22 @@
       border: 1px solid var(--border);
     }
 
+    .zenodo-logo {
+        width: 4.0em;        /* was 1em */
+        height: auto;
+        vertical-align: middle;
+        margin-right: 0.3em;
+      }
+      .zenodo-stats {
+        display: block;
+        margin-top: 0.3rem;
+        font-size: 0.9em;
+      }
+      .zenodo-stats img {
+        vertical-align: middle;
+        margin-right: 0.5rem;
+      }
+
     @media print {
       nav,
       footer,
@@ -1208,21 +1224,63 @@
       </div>
     </section>
 
-    <!-- ===== PROJECTS ===== -->
+
+    <!-- ===== PROJECTS ===== --> 
     <section id="projects">
       <h2>Projects &amp; Code</h2>
       <ul>
         <li>
-          <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">Ising AltExS</a>:
-          Open-source software for a QCD EoS with a 3D Ising critical point.
+          <a href="https://doi.org/10.5281/zenodo.10652326"
+            target="_blank" rel="noopener">
+            <img src="image/logo/site_logo/Zenod.svg"
+                alt="Zenodo logo" class="zenodo-logo" />
+            Ising AltExS
+          </a>:
+          Open‑source software for a QCD EoS with a 3D Ising critical point.
+          <div class="zenodo-stats">
+            <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
+              <img
+                src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652326&query=$.stats.unique_views&style=flat-square"
+                alt="Zenodo unique views" />
+            </a>
+            <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
+              <img
+                src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652326&query=$.stats.unique_downloads&style=flat-square"
+                alt="Zenodo unique downloads" />
+            </a>
+          </div>
         </li>
+
         <li>
-          <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">Ising-2DTExS Module</a>:
-          2D T'-Expansion Scheme EoS software under MUSES.
+          <a href="https://doi.org/10.5281/zenodo.14637802"
+            target="_blank" rel="noopener">
+            <img src="image/logo/site_logo/Zenod.svg"
+                alt="Zenodo logo" class="zenodo-logo" />
+            Ising‑2DTExS Module
+          </a>:
+          2D T′‑Expansion Scheme EoS software under MUSES.
+          <div class="zenodo-stats">
+            <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">
+              <img
+                src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_views&style=flat-square"
+                alt="Zenodo unique views" />
+            </a>
+            <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">
+              <img
+                src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_downloads&style=flat-square"
+                alt="Zenodo unique downloads" />
+            </a>
+          </div>
         </li>
+
         <li>
-          <a href="https://github.com/yourusername/MUSES-engine" target="_blank" rel="noopener">MUSES Calculation Engine</a>:
-          Heavy-ion &amp; neutron star EoS framework.
+          <a href="https://github.com/yourusername/MUSES-engine"
+            target="_blank" rel="noopener">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                alt="GitHub logo" class="zenodo-logo" />
+            MUSES Calculation Engine
+          </a>:
+          Heavy‑ion &amp; neutron star EoS framework.
         </li>
       </ul>
     </section>
@@ -1382,6 +1440,38 @@
         apply();
       });
     })();
+
+   async function loadZenodoStatsByConceptDOI(doi, elem) {
+    try {
+      // First, find the correct version record via the concept DOI
+      const searchUrl =
+        `https://zenodo.org/api/records/?q=conceptdoi:${doi}`;
+      const searchResp = await fetch(searchUrl);
+      const hits = (await searchResp.json()).hits.hits;
+      if (!hits.length) throw new Error('No record found');
+      const recordId = hits[0].id;
+
+      // Fetch stats for that numeric record ID
+      const statsResp = await fetch(
+        `https://zenodo.org/api/records/${recordId}`
+      );
+      const stats = await statsResp.json();
+      const { unique_views, unique_downloads } = stats.stats;
+      elem.textContent =
+        `${unique_views.toLocaleString()} views • ` +
+        `${unique_downloads.toLocaleString()} downloads`;
+    } catch (err) {
+      console.error('Zenodo stats error for', doi, err);
+      elem.textContent = 'Stats unavailable';
+    }
+  }
+
+  document
+    .querySelectorAll('.zenodo-metrics')
+    .forEach(span => {
+      loadZenodoStatsByConceptDOI(span.dataset.doi, span);
+    });
+
   </script>
 </body>
 </html>
