@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Micheal Kahangirwe - Personal Website</title>
+  <meta name="description"
+        content="Personal academic website of Micheal Kahangirwe: QCD equation of state, critical point modeling, high-performance scientific computing." />
+
+  <!-- Early theme script (prevents flash) -->
+  <script>
+    (function () {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('theme-dark');
+    })();
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1b1b1d;
+      --accent: #3c2b5f;
+      --accent-alt: #5f3cb8;
+      --muted: #555;
+      --header-bg: #030106;
+      --header-fg: #f2f2f2;
+      --card-bg: #f9f9f9;
+      --border: #dddddf;
+      --code-bg: #f5f5f7;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --trans-fast: .25s;
+      --trans-med: .35s;
+      --easing: cubic-bezier(.4, .2, .2, 1);
+      --logo-bg: #ffffff;
+      --logo-border: #dddddf;
+      --max-text: 62ch;
+      --sticky-top: 4.5rem;
+    }
+
+    .theme-dark {
+      --bg: #0f0f12;
+      --fg: #f1f1f4;
+      --accent: #a18bff;
+      --accent-alt: #c5b6ff;
+      --muted: #a9a9b3;
+      --header-bg: #12121a;
+      --header-fg: #f1f1f4;
+      --card-bg: #1f1f24;
+      --border: #2d2d35;
+      --code-bg: #1c1c23;
+      --shadow: rgba(0, 0, 0, 0.55);
+      --logo-bg: #1f1f24;
+      --logo-border: #2d2d35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--fg);
+      transition:
+        background var(--trans-med) var(--easing),
+        color var(--trans-med) var(--easing);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent-alt);
+      text-decoration: none;
+      transition: color var(--trans-fast);
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: #000;
+      color: #fff;
+      padding: .75rem 1rem;
+      z-index: 1000;
+    }
+
+    .skip-link:focus {
+      left: 0;
+    }
+
+    header {
+      background: var(--header-bg);
+      color: var(--header-fg);
+      padding: .5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 .75rem;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    nav .brand {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: .5px;
+      color: var(--header-fg);
+    }
+
+    nav .nav-right {
+      margin-left: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    nav a {
+      padding: .45rem .65rem;
+      border-radius: 4px;
+      font-size: .85rem;
+      color: var(--header-fg);
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--fg);
+      padding: .5rem .8rem;
+      font-size: .8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      gap: .55rem;
+      align-items: center;
+      font-weight: 600;
+      transition:
+        background var(--trans-fast),
+        color var(--trans-fast),
+        border-color var(--trans-fast),
+        transform var(--trans-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .theme-toggle:active {
+      transform: scale(.94);
+    }
+
+    .theme-toggle .icon,
+    .theme-toggle .label {
+      transition:
+        opacity .45s var(--easing),
+        transform .45s var(--easing);
+    }
+
+    .theme-toggle.animating .icon {
+      opacity: 0;
+      transform: rotate(200deg) scale(.4);
+    }
+
+    .theme-toggle.animating .label {
+      opacity: 0;
+      transform: translateY(-40%);
+    }
+
+    .theme-toggle.ready .icon,
+    .theme-toggle.ready .label {
+      opacity: 1;
+      transform: none;
+    }
+
+    main section {
+      max-width: 1080px;
+      margin: 2.2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.25;
+      margin: 0 0 .6rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 2.55rem);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    h3 {
+      font-size: 1.15rem;
+    }
+
+    h4 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: .1rem 0 .45rem;
+      color: var(--muted);
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    #home {
+      margin-top: 1.6rem;
+    }
+
+    .intro-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .intro-left {
+      flex: 0 0 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.15rem;
+      position: sticky;
+      top: var(--sticky-top);
+      align-self: flex-start;
+      z-index: 150;
+    }
+
+    .intro-right {
+      flex: 1 1 420px;
+      min-width: 300px;
+      /* max-width: var(--max-text); */
+      max-width: 80ch;
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+    }
+
+    
+
+    .profile-pic {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      background: #ddd;
+      box-shadow: 0 4px 16px var(--shadow);
+      transition:
+        transform .4s var(--easing),
+        box-shadow .4s var(--easing);
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 22px var(--shadow);
+    }
+
+    .tagline {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: -.2rem;
+    }
+
+    .intro-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: .2rem 0 .4rem;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: .65rem 1.05rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 500;
+      transition:
+        background var(--trans-fast),
+        transform var(--trans-fast);
+      text-decoration: none;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--accent-alt);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: var(--card-bg);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: .65rem 1.05rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition:
+        background var(--trans-fast),
+        transform var(--trans-fast);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .email-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: .55rem .65rem;
+      border-radius: 6px;
+      font-size: .78rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .email-box code {
+      background: transparent;
+      padding: 0;
+      border: none;
+      font-size: .78rem;
+      font-family: Consolas, monospace;
+    }
+
+    .copy-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-size: .7rem;
+      padding: .4rem .6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: .5px;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      transition:
+        background var(--trans-fast),
+        transform var(--trans-fast);
+    }
+
+    .copy-btn:hover,
+    .copy-btn:focus {
+      background: var(--accent-alt);
+    }
+
+    .copy-btn:active {
+      transform: scale(.92);
+    }
+
+    .copy-status {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .link-groups {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.05rem;
+    }
+
+    .profile-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .social-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      background: var(--card-bg);
+      color: var(--fg);
+      padding: .55rem .65rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .25px;
+      transition:
+        background var(--trans-fast),
+        border-color var(--trans-fast),
+        color var(--trans-fast),
+        transform var(--trans-fast);
+      text-decoration: none;
+    }
+
+    .social-links a .icon {
+      width: 1.05em;
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    .social-links a:hover,
+    .social-links a:focus {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .intro-flex {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .intro-left {
+        position: static;
+        top: auto;
+        max-height: none;
+      }
+
+      .intro-left,
+      .intro-right {
+        width: 100%;
+        max-width: 700px;
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.15rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 1rem 1.05rem 1.15rem;
+      border-radius: 8px;
+      flex: 1 1 calc(50% - 1.15rem);
+      min-width: 280px;
+      box-shadow: 0 2px 4px var(--shadow);
+      border: 1px solid var(--border);
+      transition:
+        transform var(--trans-fast),
+        box-shadow var(--trans-fast),
+        background var(--trans-med);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px var(--shadow);
+    }
+
+    @media (max-width: 680px) {
+      .card {
+        flex: 1 1 100%;
+      }
+    }
+
+    #talks .card {
+      display: flex;
+      gap: .9rem;
+      align-items: center;
+      position: relative;
+    }
+
+    #talks .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 6px;
+      background: var(--logo-bg);
+      padding: .35rem;
+      border: 1px solid var(--logo-border);
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .slides-links {
+      margin-top: .4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+    }
+
+    .slides-links a {
+      font-size: .7rem;
+      padding: .35rem .55rem;
+      border-radius: 4px;
+      background: var(--accent);
+      color: #fff;
+      letter-spacing: .3px;
+      text-decoration: none;
+    }
+
+    .slides-links a:hover {
+      background: var(--accent-alt);
+    }
+
+    .talk-meta {
+      font-size: .7rem;
+      color: var(--muted);
+      margin: .25rem 0 -.2rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: .75rem 0 1.2rem;
+    }
+
+    .filter-bar select,
+    .filter-bar input {
+      padding: .55rem .6rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      font-size: .8rem;
+    }
+
+    .filter-bar button {
+      padding: .55rem .85rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .publications-list {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+
+    .publications-list li {
+      margin: 0 0 1.1rem;
+    }
+
+    .pub-links {
+      margin: .35rem 0 0;
+      font-size: .85rem;
+    }
+
+    .pub-links a {
+      text-decoration: none;
+    }
+
+    .pub-links a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #1e1e22;
+      color: #fff;
+      text-align: center;
+      padding: 1.4rem .75rem;
+      font-size: .85rem;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      margin: .3rem 0;
+    }
+
+    code {
+      font-family: Consolas, Menlo, Monaco, monospace;
+      background: var(--code-bg);
+      padding: 0 .3rem;
+      border-radius: 4px;
+      font-size: .85rem;
+      border: 1px solid var(--border);
+    }
+
+    @media print {
+      nav,
+      footer,
+      .btn,
+      .theme-toggle,
+      .social-links,
+      .email-box,
+      .filter-bar,
+      .slides-links {
+        display: none !important;
+      }
+
+      body {
+        font-size: 11pt;
+      }
+
+      section {
+        margin: 1.2rem auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header>
+    <nav>
+      <a class="brand" href="#home">M. Kahangirwe</a>
+      <div class="nav-right" aria-label="Main navigation">
+        <a href="#publications">Publications</a>
+        <a href="#talks">Talks</a>
+        <a href="#education">Education</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle"
+                class="theme-toggle ready"
+                type="button"
+                aria-pressed="false"
+                aria-label="Activate dark mode">
+          <span class="icon" aria-hidden="true">🌙</span>
+          <span class="label">Dark</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main">
+    <!-- ===== HOME / INTRO ===== -->
+    <section id="home">
+      <div class="intro-flex">
+        <div class="intro-left">
+          <img src="image/profile.jpg"
+               alt="Portrait of Micheal Kahangirwe"
+               class="profile-pic" />
+
+            <div class="email-box" data-email="kahangirwem@gmail.com">
+              <code>kahangirwem@gmail.com</code>
+              <button class="copy-btn"
+                      type="button"
+                      aria-label="Copy email to clipboard">📋 Copy</button>
+              <span class="copy-status" aria-live="polite"></span>
+            </div>
+
+            <div class="link-groups">
+              <div class="profile-group">
+                <h4>Academic IDs</h4>
+                <ul class="social-links">
+                  <li>
+                    <a href="https://orcid.org/0000-0001-9144-6240" target="_blank" rel="noopener">
+                      <span class="icon">🆔</span><span>ORCID</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://scholar.google.com/citations?user=gMazgF0AAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
+                      <span class="icon">🎓</span><span>Google Scholar</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://inspirehep.net/authors/2761655?ui-citation-summary=true" target="_blank" rel="noopener">
+                      <span class="icon">🧪</span><span>InspireHEP</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.researchgate.net/profile/Micheal-Kahangirwe" target="_blank" rel="noopener">
+                      <span class="icon">🔗</span><span>ResearchGate</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="profile-group">
+                <h4>Professional / Social</h4>
+                <ul class="social-links">
+                  <li>
+                    <a href="https://www.linkedin.com/in/micheal-kahangirwe-ba4186129" target="_blank" rel="noopener">
+                      <span class="icon">💼</span><span>LinkedIn</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/mkahangi?tab=overview&from=2025-07-01&to=2025-07-20" target="_blank" rel="noopener">
+                      <span class="icon">🐙</span><span>GitHub</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/@michealkahangirwe8355" target="_blank" rel="noopener">
+                      <span class="icon">📺</span><span>YouTube</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+
+        <div class="intro-right">
+          <h1>Micheal Kahangirwe</h1>
+          <p class="tagline">
+            Ph.D. Candidate · QCD Equation of State · Critical Point Modeling · HPC &amp; Scientific Software
+          </p>
+          <p>
+            Analytical and results-driven physicist with a Ph.D. focus in Theoretical Physics and deep expertise in computational modeling,
+            high-performance scientific computing, and data analysis. Experienced in cross-disciplinary collaboration, open-source software
+            development, and communicating complex findings to diverse audiences. Passionate about applying physics-informed approaches and
+            machine learning to solve real-world problems in data science, software engineering, biotech, and advanced analytics.
+          </p>
+          <div class="intro-actions">
+            <a href="#contact" class="btn">Get in Touch</a>
+            <a href="Micheal_CV.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
+            <a href="#talks" class="btn-outline">Talk Slides ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="container">
+        <div class="card">
+          <h3>Ph.D. in Physics (Ph.D. + MSc)</h3>
+          <p>
+            <strong>College of Natural Sciences &amp; Mathematics, University of Houston</strong><br />
+            August 2020 – Present<br />
+            GPA: 3.862/4 (Magna Cum Laude)
+          </p>
+          <p>
+            Dissertation: “Nuclear Physics: QCD Equation of State at Finite Density with Critical Point”<br />
+            Advisor: Prof. Claudia Ratti
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>M.Sc. in High Energy Physics</h3>
+          <p>
+            <strong>ICTP–EAIFR, University of Rwanda</strong><br />
+            August 2018 – July 2020<br />
+            Final Grade: Distinction (4.76/5)
+          </p>
+            <p>
+              Thesis: “Exploration of Thermo-Field Theory”<br />
+              Advisor: Prof. Joan Elias Miro
+            </p>
+        </div>
+
+        <div class="card">
+          <h3>B.Sc. Physics &amp; Mathematics</h3>
+          <p>
+            <strong>Makerere University (MAK), Uganda</strong><br />
+            August 2014 – May 2017<br />
+            GPA: 4.50/5 (First Class)
+          </p>
+          <p>
+            Final Project: “Creating Waypoints and Way Routes”<br />
+            Advisor: Prof. Florence M. D’ujanga
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <section id="publications">
+      <h2>Research Publications</h2>
+      <ul class="publications-list">
+        <li>
+          Abuali, A., Jahan, J., Borsányi, S., <strong>Kahangirwe, M.</strong>, Parotto, P., Pásztor, A., Ratti, C., Shah, H., &amp; Trabulsi, S. A. (2025).
+          <em>4D-TExS: A new 4D lattice-QCD equation of state with extended density coverage</em>. Phys. Rev. D (Accepted).
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2504.01881" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2907385" target="_blank" rel="noopener">InspireHEP</a>
+          </div>
+        </li>
+        <li>
+          Pelicer, M., ... , <strong>Kahangirwe, M.</strong>, Ratti, C., et al. (MUSES Collaboration) (2025).
+          <em>Building Neutron Stars with the MUSES Calculation Engine</em>. Phys. Rev. D 111, 103037.
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2502.07902" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2879247" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://doi.org/10.1103/PhysRevD.111.103037" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </li>
+        <li>
+          Ratti, C., Abuali, A., Jahan, J., <strong>Kahangirwe, M.</strong>, Shah, H., Trabulsi, S. A., Borsányi, S., Parotto, P., &amp; Pásztor, A. (2024).
+          <em>4D-TExS: A new 4D lattice-QCD equation of state with extended density coverage</em>. (MG7 Proceedings, to appear).
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/" target="_blank" rel="noopener">InspireHEP</a>
+          </div>
+        </li>
+        <li>
+          Jahan, J., Abuali, A., Borsányi, S., <strong>Kahangirwe, M.</strong>, Parotto, P., Pásztor, A., Ratti, C., Shah, H., &amp; Trabulsi, S. A. (2024).
+          <em>4D-TExS: A new 4D lattice-QCD equation of state with extended density coverage</em>. (SQM 2024 Proceedings, to appear).
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://www.epj-conferences.org/articles/epjconf/abs/2025/01/epjconf_sqm2024_06002/epjconf_sqm2024_06002.html" target="_blank" rel="noopener">
+              Conference
+            </a>
+          </div>
+        </li>
+        <li>
+          <strong>Kahangirwe, M.</strong>, Gonzalez, I., Muñoz, J. A., Ratti, C., &amp; Vovchenko, V. (2024).
+          <em>Convergence properties of T’-Expansion Scheme: Hadron Resonance Gas and Cluster Expansion Model</em>.
+          Phys. Rev. D 111. arXiv:2408.04588.
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2408.04588" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2816302" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://doi.org/10.1103/PhysRevD.111.094034" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </li>
+        <li>
+          <strong>Kahangirwe, M.</strong>, Bass, S. A., Bratkovskaya, E., Jahan, J., Parotto, P., Price, D., Ratti, C., Soloveva, O., &amp; Stephanov, M. (2024).
+          <em>Finite density QCD equation of state: critical point and lattice-based T’-expansion</em>.
+          Phys. Rev. D 109(9), 094046.
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2402.08636" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2757994" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://doi.org/10.1103/PhysRevD.109.094046" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </li>
+        <li>
+          Kumar, R., ... , <strong>Kahangirwe, M.</strong>, Ratti, C., et al. (MUSES Collaboration) (2024).
+          <em>Theoretical and Experimental Constraints for the Equation of State of Dense and Hot Matter</em>.
+          Living Rev. Relativity 27, Article 3.
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2303.17021" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2647247" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://link.springer.com/article/10.1007/s41114-024-00049-6" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </li>
+        <li>
+          <strong>Kahangirwe, M.</strong>, Bass, S. A., Bratkovskaya, E., Jahan, J., Parotto, P., Price, D., Ratti, C., Soloveva, O., &amp; Stephanov, M. (2023).
+          <em>Lattice-based equation of state with 3D Ising Critical point</em>. EPJ Web Conf. 296, 14013.
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2312.11265" target="_blank" rel="noopener">arXiv</a> |
+            <a href="https://inspirehep.net/literature/2738576" target="_blank" rel="noopener">InspireHEP</a> |
+            <a href="https://www.epj-conferences.org/articles/epjconf/abs/2024/06/epjconf_QuarkMatter2023_14013/epjconf_QuarkMatter2023_14013.html" target="_blank" rel="noopener">
+              Journal
+            </a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== TALKS ===== -->
+    <section id="talks">
+      <h2>Conferences &amp; Talks</h2>
+
+      <div class="filter-bar" aria-label="Filter talks">
+        <input id="talkSearch" type="search" placeholder="Search title / venue" aria-label="Search talks" />
+        <select id="yearFilter" aria-label="Filter by year">
+          <option value="">All Years</option>
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+          <option>2022</option>
+        </select>
+        <select id="typeFilter" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <option value="invited">Invited</option>
+          <option value="contributed">Contributed</option>
+          <option value="poster">Poster</option>
+        </select>
+        <button class="btn-outline" type="button" id="resetFilters">Reset</button>
+      </div>
+
+      <div class="container" id="talkCards">
+        <!-- TAPS 2025 -->
+        <div class="card" data-year="2025" data-type="contributed">
+          <a class="logo-link"
+             href="https://www.uh.edu/nsm/physics/news-events/tsaapt-meeting/index.php"
+             target="_blank"
+             rel="noopener"
+             aria-label="Texas APS 2025 conference website">
+            <img src="image/logo/TAPS2025.png" alt="TAPS 2025 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Lattice QCD-Based 3D-Ising Equation of State: Universal Behaviors Near the Critical Point</h3>
+            <div class="talk-meta">Texas APS 2025, Houston, TX (Apr 3–5, 2025)</div>
+            <div class="slides-links">
+              <a href="slides/TAPS-2025.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- APS Global Physics Summit 2025 -->
+        <div class="card" data-year="2025" data-type="contributed">
+          <a class="logo-link"
+             href="https://www.aps.org/events/2025/joint-meeting"
+             target="_blank"
+             rel="noopener"
+             aria-label="APS Global Physics Summit 2025 website">
+            <img src="image/logo/APS2025.png" alt="APS 2025 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>4D-TExS: A Novel 4D Lattice-based QCD EoS</h3>
+            <div class="talk-meta">APS Global Physics Summit 2025, Anaheim, CA (Mar 16–21, 2025)</div>
+            <div class="slides-links">
+              <a href="slides/4D-TExS-2025.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NSBP-NSHP 2024 -->
+        <div class="card" data-year="2024" data-type="contributed">
+          <a class="logo-link"
+             href="https://nsbp.org/page/2024conferencewrapup"
+             target="_blank"
+             rel="noopener"
+             aria-label="NSBP-NSHP Joint Conference 2024 website">
+            <img src="image/logo/nsbp2024.png" alt="NSBP-NSHP Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Equation of State of Strong Interactions</h3>
+            <div class="talk-meta">NSBP-NSHP Joint Conference 2024, Houston, TX (Nov 13–17, 2024)</div>
+            <div class="slides-links">
+              <a href="slides/NSBP-2024.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CPOD 2024 -->
+        <div class="card" data-year="2024" data-type="contributed">
+          <a class="logo-link"
+             href="https://conferences.lbl.gov/event/1376/"
+             target="_blank"
+             rel="noopener"
+             aria-label="CPOD 2024 workshop website">
+            <img src="image/logo/CPOD2024.png" alt="CPOD 2024 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>3D-Ising Critical Point Mapped onto QCD EoS</h3>
+            <div class="talk-meta">CPOD Workshop 2024, LBNL, Berkeley, CA (May 20–24, 2024)</div>
+            <div class="slides-links">
+              <a href="slides/CPOD-2024.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MUSES Collaboration Meeting 2024 -->
+        <div class="card" data-year="2024" data-type="collaboration">
+          <a class="logo-link"
+             href="https://musesframework.io/collaboration-meeting-2025/"
+             target="_blank"
+             rel="noopener"
+             aria-label="MUSES collaboration website">
+            <img src="image/logo/muses.png" alt="MUSES Collaboration Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Ising-TExS Module Update</h3>
+            <div class="talk-meta">MUSES Collaboration Meeting, UIUC, IL (May 15–17, 2024)</div>
+            <div class="slides-links">
+              <a href="slides/MUSES-2024.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space City Symposium 2024 -->
+        <div class="card" data-year="2024" data-type="contributed">
+          <a class="logo-link"
+             href="https://physics.rice.edu/"
+             target="_blank"
+             rel="noopener"
+             aria-label="Space City Symposium (hosted at Rice University)">
+            <img src="image/logo/HoustonAPS.png" alt="Space City Symposium Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Equation of State of Strong Interaction</h3>
+            <div class="talk-meta">APS Space City Symposium, Rice University, TX (Mar 22, 2024)</div>
+            <div class="slides-links">
+              <a href="slides/Houston-SpaceCity-APS2024.pdf" download>Slides</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BES-TEA Seminar -->
+        <div class="card" data-year="2024" data-type="invited">
+          <a class="logo-link"
+             href="https://sites.google.com/view/bestea-seminar-series"
+             target="_blank"
+             rel="noopener"
+             aria-label="BES-TEA seminar series website">
+            <img src="image/logo/BES_TEA.png" alt="BES-TEA Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Equation of State of Strong Interaction</h3>
+            <div class="talk-meta">
+              <a class="event-location"
+                 href="https://sites.google.com/view/bestea-seminar-series"
+                 target="_blank"
+                 rel="noopener"
+                 aria-label="Event website (opens in new tab)">Online</a>
+              (Mar 19, 2024)
+            </div>
+            <div class="slides-links">
+              <a href="https://drive.google.com/file/d/1tjOhiDbh2ihAwuyxviKL47idi1_uTzuH/view" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WWND 2024 -->
+        <div class="card" data-year="2024" data-type="contributed">
+          <a class="logo-link"
+             href="https://indico.cern.ch/event/1345629/"
+             target="_blank"
+             rel="noopener"
+             aria-label="Winter Workshop on Nuclear Dynamics 2024 website">
+            <img src="image/logo/wnwd2024.png" alt="WWND 2024 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>Finite Density QCD EoS and T'-Expansion</h3>
+            <div class="talk-meta">39th Winter Workshop on Nuclear Dynamics, Jackson, WY (Feb 11–17, 2024)</div>
+            <div class="slides-links">
+              <a href="slides/WWND-2024.pdf" download>Slides</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- QM 2023 -->
+        <div class="card" data-year="2023" data-type="contributed">
+          <a class="logo-link"
+             href="https://indico.cern.ch/event/1139644/"
+             target="_blank"
+             rel="noopener"
+             aria-label="Quark Matter 2023 conference website">
+            <img src="image/logo/QM2023.png" alt="QM 2023 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>QCD-based Equation of State at Finite Density with a Critical Point...</h3>
+            <div class="talk-meta">Quark Matter 2023, Houston, TX (Sep 3–9, 2023)</div>
+            <div class="slides-links">
+              <a href="slides/QM2023.pdf" download>Slides (PDF)</a>
+              <a href="posters/2023_QM_QCD_EoS_CriticalPoint_poster.pdf" download>Poster</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WWND 2023 -->
+        <div class="card" data-year="2023" data-type="contributed">
+          <a class="logo-link"
+             href="https://indico.cern.ch/event/1196342/"
+             target="_blank"
+             rel="noopener"
+             aria-label="Winter Workshop on Nuclear Dynamics 2023 website">
+            <img src="image/logo/wnwd2023.png" alt="WWND 2023 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>QCD-based Equation of State at Finite Density with a Critical Point...</h3>
+            <div class="talk-meta">
+              38th Winter Workshop on Nuclear Dynamics, Puerto Vallarta, Mexico (Feb 5–11, 2023)
+            </div>
+            <div class="slides-links">
+              <a href="slides/2023_WWND_QCD_EoS_CriticalPoint.pdf" download>Slides</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DNP APS 2022 -->
+        <div class="card" data-year="2022" data-type="contributed">
+          <a class="logo-link"
+             href="https://meetings.aps.org/Meeting/DNP22/APS_epitome"
+             target="_blank"
+             rel="noopener"
+             aria-label="APS DNP 2022 meeting website">
+            <img src="image/logo/DNP2022.png" alt="DNP 2022 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>QCD-based Equation of State at Finite Density...</h3>
+            <div class="talk-meta">DNP APS, New Orleans, LA (Oct 11–17, 2022)</div>
+            <div class="slides-links">
+              <a href="slides/DNP-2022.pdf" download>Slides (PDF)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- APS April 2022 -->
+        <div class="card" data-year="2022" data-type="contributed">
+          <a class="logo-link"
+             href="https://meetings.aps.org/Meeting/APR22/Content/4194"
+             target="_blank"
+             rel="noopener"
+             aria-label="APS April Meeting 2022 website">
+            <img src="image/logo/APS2022.png" alt="APS 2022 Logo" />
+          </a>
+          <div class="card-content">
+            <h3>QCD-based Equation of State at Finite Density...</h3>
+            <div class="talk-meta">APS April Meeting, New York, NY (Apr 9–12, 2022)</div>
+            <div class="slides-links">
+              <a href="slides/2022_APS_April_QCD_EoS.pdf" download>Slides</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TEACHING ===== -->
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <div class="container">
+        <div class="card">
+          <h3>Graduate Teaching Assistant</h3>
+          <p>University of Houston (Jan 2021 – Present)</p>
+          <p>Led lab sessions, graded assignments, tutored students, and provided research guidance.</p>
+        </div>
+        <div class="card">
+          <h3>Teaching Assistant</h3>
+          <p>Makerere University (Aug 2017 – Aug 2018)</p>
+          <p>Instructed undergraduates, conducted office hours, and supported academic activities.</p>
+        </div>
+        <div class="card">
+          <h3>Physics &amp; Mathematics Teacher</h3>
+          <p>Kisubi School, Uganda (Feb 2018 – Aug 2018)</p>
+          <p>Designed and delivered lesson plans, supervised labs, and promoted critical thinking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <h2>Projects &amp; Code</h2>
+      <ul>
+        <li>
+          <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">Ising AltExS</a>:
+          Open-source software for a QCD EoS with a 3D Ising critical point.
+        </li>
+        <li>
+          <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">Ising-2DTExS Module</a>:
+          2D T'-Expansion Scheme EoS software under MUSES.
+        </li>
+        <li>
+          <a href="https://github.com/yourusername/MUSES-engine" target="_blank" rel="noopener">MUSES Calculation Engine</a>:
+          Heavy-ion &amp; neutron star EoS framework.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        <strong>Office:</strong> Science &amp; Research Building, 3507 Cullen Blvd, Room 629-A, Houston, TX 77204, USA
+      </p>
+      <p>
+        <strong>Email:</strong>
+        <a href="mailto:kahangirwem@gmail.com">kahangirwem@gmail.com</a> |
+        <a href="mailto:mkahangi@central.uh.edu">mkahangi@central.uh.edu</a>
+      </p>
+      <p>
+        <strong>LinkedIn:</strong>
+        <a href="https://linkedin.com/in/micheal-kahangirwe-ba4186129"
+           target="_blank"
+           rel="noopener">micheal-kahangirwe-ba4186129</a>
+      </p>
+      <p>
+        <strong>ORCID:</strong>
+        <a href="https://orcid.org/0000-0001-9144-6240"
+           target="_blank"
+           rel="noopener">0000-0001-9144-6240</a>
+      </p>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2025 Micheal Kahangirwe. All rights reserved.</p>
+    <p><small>Last updated: January 2025</small></p>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    /* Theme toggle */
+    (function () {
+      const btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      const root = document.documentElement;
+      const icon = btn.querySelector('.icon');
+      const label = btn.querySelector('.label');
+      const DUR = 450;
+
+      function setButton(theme) {
+        if (theme === 'dark') {
+          icon.textContent = '☀️';
+            label.textContent = 'Light';
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', 'Activate light mode');
+        } else {
+          icon.textContent = '🌙';
+          label.textContent = 'Dark';
+          btn.setAttribute('aria-pressed', 'false');
+          btn.setAttribute('aria-label', 'Activate dark mode');
+        }
+      }
+
+      function applyTheme(theme, animate = true) {
+        const dark = root.classList.contains('theme-dark');
+        if ((theme === 'dark' && dark) || (theme === 'light' && !dark)) return;
+        if (animate) {
+          btn.classList.add('animating');
+          btn.classList.remove('ready');
+        }
+        setTimeout(() => {
+          root.classList.toggle('theme-dark', theme === 'dark');
+          setButton(theme);
+          if (animate) {
+            void btn.offsetWidth;
+            btn.classList.remove('animating');
+            btn.classList.add('ready');
+          }
+        }, animate ? DUR * 0.55 : 0);
+      }
+
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        applyTheme(stored, false);
+        setButton(stored);
+      } else {
+        setButton(root.classList.contains('theme-dark') ? 'dark' : 'light');
+      }
+
+      btn.addEventListener('click', () => {
+        const next = root.classList.contains('theme-dark') ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next, true);
+      });
+    })();
+
+    /* Copy email */
+    (function () {
+      const box = document.querySelector('.email-box');
+      if (!box) return;
+      const email = box.getAttribute('data-email');
+      const btn = box.querySelector('.copy-btn');
+      const status = box.querySelector('.copy-status');
+
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          const original = btn.textContent.trim();
+          btn.textContent = '✅ Copied';
+          status.textContent = 'Email copied.';
+          setTimeout(() => {
+            btn.textContent = original;
+            status.textContent = '';
+          }, 2000);
+        } catch (e) {
+          btn.textContent = '⚠️ Error';
+          status.textContent = 'Copy failed.';
+          setTimeout(() => {
+            btn.textContent = '📋 Copy';
+            status.textContent = '';
+          }, 2500);
+        }
+      });
+    })();
+
+    /* Talk filtering */
+    (function () {
+      const search = document.getElementById('talkSearch');
+      const year = document.getElementById('yearFilter');
+      const type = document.getElementById('typeFilter');
+      const reset = document.getElementById('resetFilters');
+      const cards = [...document.querySelectorAll('#talkCards .card')];
+
+      function apply() {
+        const q = (search.value || '').toLowerCase();
+        const y = year.value;
+        const t = type.value;
+
+        cards.forEach(c => {
+          const title = c.querySelector('h3').textContent.toLowerCase();
+          const meta = c.querySelector('.talk-meta').textContent.toLowerCase();
+          const cYear = c.getAttribute('data-year');
+          const cType = c.getAttribute('data-type');
+
+          const matchQ = !q || title.includes(q) || meta.includes(q);
+          const matchY = !y || y === cYear;
+          const matchT = !t || t === cType;
+
+          c.classList.toggle('hidden', !(matchQ && matchY && matchT));
+        });
+      }
+
+      [search, year, type].forEach(el => el.addEventListener('input', apply));
+
+      reset.addEventListener('click', () => {
+        search.value = '';
+        year.value = '';
+        type.value = '';
+        apply();
+      });
+    })();
+  </script>
+</body>
+</html>
