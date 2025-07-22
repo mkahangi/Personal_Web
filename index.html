@@ -655,6 +655,77 @@
         height: 50%;
       }
 
+ /* remove the old button rules (you can delete these) */
+/*
+.project-button { display: none; }
+*/
+
+/* Grid of projects */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* Card styling */
+.project-card {
+  display: flex;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.project-logo {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 1rem;
+  border-radius: 6px;
+  background: var(--logo-bg);
+  padding: .5rem;
+  border: 1px solid var(--logo-border);
+}
+
+
+/* Text block */
+.project-content h3 {
+  margin: 0 0 .3rem;
+  font-size: 1.15rem;
+}
+
+.project-content h3 a {
+  color: var(--fg);
+}
+
+.project-desc {
+  margin: 0 0 .6rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* Badges row */
+.project-stats {
+  display: flex;
+  gap: .5rem;
+}
+
+.project-stats img {
+  height: 1.6em;
+  /* shields.io badges size */
+}
+
+
     @media print {
       nav,
       footer,
@@ -877,6 +948,7 @@
         </div>
       </div>
     </section>
+    
 
     <!-- ===== PUBLICATIONS ===== -->
     <section id="publications">
@@ -1235,65 +1307,139 @@
       </div>
     </section>
 
-
-    <!-- ===== PROJECTS ===== --> 
+    <!-- ===== PROJECTS & CODE ===== -->
     <section id="projects">
       <h2>Projects &amp; Code</h2>
-      <ul>
-        <li>
-          <a href="https://doi.org/10.5281/zenodo.10652326"
-            target="_blank" rel="noopener">
-            <img src="image/logo/site_logo/Zenod.svg"
-                alt="Zenodo logo" class="zenodo-logo" />
-            Ising AltExS
-          </a>:
-          Open‑source software for a QCD EoS with a 3D Ising critical point.
-          <div class="zenodo-stats">
-            <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
-              <img
-                src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652326&query=$.stats.unique_views&style=flat-square"
-                alt="Zenodo unique views" />
-            </a>
-            <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
-              <img
-                src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652326&query=$.stats.unique_downloads&style=flat-square"
-                alt="Zenodo unique downloads" />
-            </a>
-          </div>
-        </li>
 
-        <li>
-          <a href="https://doi.org/10.5281/zenodo.14637802"
-            target="_blank" rel="noopener">
-            <img src="image/logo/site_logo/Zenod.svg"
-                alt="Zenodo logo" class="zenodo-logo" />
-            Ising‑2DTExS Module
-          </a>:
-          2D T′‑Expansion Scheme EoS software under MUSES.
-          <div class="zenodo-stats">
-            <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">
-              <img
-                src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_views&style=flat-square"
-                alt="Zenodo unique views" />
-            </a>
-            <a href="https://doi.org/10.5281/zenodo.14637802" target="_blank" rel="noopener">
-              <img
-                src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_downloads&style=flat-square"
-                alt="Zenodo unique downloads" />
-            </a>
-          </div>
-        </li>
+      <div class="projects-grid">
+        <!-- Card 1 -->
+        <div class="project-card">
+          <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
+            <img
+              src="image/logo/site_logo/Zenod.svg"
+              alt="Zenodo logo"
+              class="project-logo" />
+          </a>
 
-        <li>
-          <a href="https://github.com/yourusername/MUSES-engine"
-            target="_blank" rel="noopener">
-            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                alt="GitHub logo" class="zenodo-logo" />
-            MUSES Calculation Engine
-          </a>:
-          Heavy‑ion &amp; neutron star EoS framework.
-        </li>
-      </ul>
+          <div class="project-content">
+            <h3>
+              <a href="https://doi.org/10.5281/zenodo.10652326"
+                target="_blank"
+                rel="noopener">
+                Ising AltExS
+              </a>
+            </h3>
+            <p class="project-desc">
+              Open‑source software for a QCD EoS with a 3D Ising critical point.
+            </p>
+            <div class="project-stats">
+              <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
+              <img
+               src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652327&query=$.stats.unique_views&style=flat-square"
+                alt="Zenodo views" />
+              <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
+              <img
+                src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F10652327&query=$.stats.unique_downloads&style=flat-square"
+                alt="Zenodo downloads" />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Card 2 -->
+        <div class="project-card">
+          <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+          <img
+            src="image/logo/site_logo/Zenod.svg"
+            alt="Zenodo logo"
+            class="project-logo" />
+
+          <div class="project-content">
+            <h3>
+              <a href="https://doi.org/10.5281/zenodo.14637802"
+                target="_blank"
+                rel="noopener">
+                Ising‑2DTExS Module
+              </a>
+            </h3>
+            <p class="project-desc">
+              2D T′‑Expansion Scheme EoS software under MUSES.
+            </p>
+            <div class="project-stats">
+              <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+                <img
+                  src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_views&style=flat-square"
+                  alt="Zenodo views" />
+              <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+                <img
+                  src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_downloads&style=flat-square"
+                alt="Zenodo downloads" />
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Card 2 -->
+        <div class="project-card">
+          <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+          <img
+            src="image/logo/site_logo/Zenod.svg"
+            alt="Zenodo logo"
+            class="project-logo" />
+
+          <div class="project-content">
+            <h3>
+              <a href="https://doi.org/10.5281/zenodo.14637802"
+                target="_blank"
+                rel="noopener">
+                Ising‑2DTExS Module
+              </a>
+            </h3>
+            <p class="project-desc">
+              2D T′‑Expansion Scheme EoS software under MUSES.
+            </p>
+            <div class="project-stats">
+              <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+                <img
+                  src="https://img.shields.io/badge/dynamic/json.svg?label=views&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_views&style=flat-square"
+                  alt="Zenodo views" />
+              <a href="https://zenodo.org/records/14637802" target="_blank" rel="noopener">
+                <img
+                  src="https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fzenodo.org%2Fapi%2Frecords%2F14637802&query=$.stats.unique_downloads&style=flat-square"
+                alt="Zenodo downloads" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3
+        <div class="project-card">
+          <img
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            alt="GitHub logo"
+            class="project-logo" />
+
+          <div class="project-content">
+            <h3>
+              <a href="https://github.com/yourusername/MUSES-engine"
+                target="_blank"
+                rel="noopener">
+                MUSES Calculation Engine
+              </a>
+            </h3>
+            <p class="project-desc">
+              Heavy‑ion &amp; neutron star EoS framework.
+            </p>
+            <div class="project-stats">
+              <img
+                src="https://img.shields.io/github/stars/yourusername/MUSES-engine?style=flat-square"
+                alt="GitHub stars" />
+              <img
+                src="https://img.shields.io/github/forks/yourusername/MUSES-engine?style=flat-square"
+                alt="GitHub forks" />
+            </div>
+          </div>
+        </div> -->
+      </div>
     </section>
 
     <!-- ===== CONTACT ===== -->
