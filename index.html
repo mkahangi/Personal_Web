@@ -63,6 +63,24 @@
     main section[id]{
       scroll-margin-top: calc(var(--sticky-top) + 1rem);
     }
+.nuclear-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  margin-top: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nuclear-img:hover {
+  transform: scale(1.015);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+
 
         /* Brighter filter bar text in dark mode */
     .theme-dark .filter-bar input,
@@ -370,9 +388,12 @@
           <p>
 
 
-       Micheal Kahangirwe is a theoretical physicist whose research probes the behavior of strongly interacting matter under extreme conditions through the lens of Quantum Chromodynamics (QCD). At the University of Houston’s Nuclear Theory Group, he develops and applies first‑principles and effective‑field‑theory methods to construct the nuclear‑matter equation of state (EoS), map its phase structure, and pinpoint the critical point relevant to heavy‑ion experiments and the early universe. His work combines analytical insight with high‑performance computation to model nuclear matter at temperatures and densities far beyond everyday experience, guiding experimental programs in their search for new phenomena.
+       Micheal Kahangirwe is a theoretical physicist whose research probes the behavior of strongly interacting matter under extreme conditions through the lens of Quantum Chromodynamics (QCD). At the University of Houston’s  <a href="http://nsmn1.uh.edu/cratti/Nuclear_Theory_Group/index.html">Nuclear Theory Group</a>, he develops and applies first‑principles and effective‑field‑theory methods to construct the nuclear‑matter equation of state (EoS), map its phase structure, and pinpoint the critical point relevant to heavy‑ion experiments and the early universe. His work combines analytical insight with high‑performance computation to model nuclear matter at temperatures and densities far beyond everyday experience, guiding experimental programs in their search for new phenomena.
 
 Beyond his research, Micheal is passionate about science education and community engagement. He volunteers as a tutor for local high‑school students—igniting curiosity in the next generation of scientists—and partners with outreach groups to tackle real‑world challenges. By bridging cutting‑edge physics with hands‑on mentorship, he strives to make a lasting, positive impact both inside and outside the laboratory.
+
+
+
 
           
 
@@ -382,6 +403,10 @@ Beyond his research, Micheal is passionate about science education and community
             <a href="Micheal_CV.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
             <a href="#talks" class="btn-outline">Talk Slides ↓</a>
           </div>
+<!-- 
+            <img src="image/Nucleon and Phase Diagrams in Nuclear Physics.png" alt="Theoretical Physics in Nuclear Physics"
+                class="nuclear-img" /> -->
+
         </div>
       </div>
     </section>
