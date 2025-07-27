@@ -63,22 +63,22 @@
     main section[id]{
       scroll-margin-top: calc(var(--sticky-top) + 1rem);
     }
-.nuclear-img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  margin-top: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .nuclear-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    margin-top: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.nuclear-img:hover {
-  transform: scale(1.015);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
-}
+  .nuclear-img:hover {
+    transform: scale(1.015);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+  }
 
 
 
@@ -287,6 +287,12 @@
       body { font-size: 11pt; }
       section { margin: 1.2rem auto; }
     }
+
+        .outreach-icon {
+      width: 5em;
+      vertical-align: middle;
+      margin-right: 0.4em;
+    }
   </style>
 </head>
 <body>
@@ -302,6 +308,7 @@
         <a href="#talks">Talks</a>
         <a href="#teaching">Teaching</a>
         <a href="#projects">Projects</a>
+        <a href="#outreach">Outreach</a>
         <a href="#contact">Contact</a>
         <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Activate dark mode">
           <span class="icon" aria-hidden="true">🌙</span>
@@ -391,11 +398,6 @@
        Micheal Kahangirwe is a theoretical physicist whose research probes the behavior of strongly interacting matter under extreme conditions through the lens of Quantum Chromodynamics (QCD). At the University of Houston’s  <a href="http://nsmn1.uh.edu/cratti/Nuclear_Theory_Group/index.html">Nuclear Theory Group</a>, he develops and applies first‑principles and effective‑field‑theory methods to construct the nuclear‑matter equation of state (EoS), map its phase structure, and pinpoint the critical point relevant to heavy‑ion experiments and the early universe. His work combines analytical insight with high‑performance computation to model nuclear matter at temperatures and densities far beyond everyday experience, guiding experimental programs in their search for new phenomena.
 
 Beyond his research, Micheal is passionate about science education and community engagement. He volunteers as a tutor for local high‑school students—igniting curiosity in the next generation of scientists—and partners with outreach groups to tackle real‑world challenges. By bridging cutting‑edge physics with hands‑on mentorship, he strives to make a lasting, positive impact both inside and outside the laboratory.
-
-
-
-
-          
 
           </p>
           <div class="intro-actions">
@@ -689,11 +691,13 @@ Beyond his research, Micheal is passionate about science education and community
       </div>
     </section>
 
-    <!-- PROJECTS -->
+
+
+        <!-- PROJECTS -->
     <section id="projects">
-      <h2>Projects &amp; Code</h2>
-      <div class="projects-grid">
-        <!-- Card 1 -->
+      <h2>Projects &amp; Code </h2>
+      <div class="container">
+       <!-- Card 1 -->
         <div class="project-card">
           <a href="https://doi.org/10.5281/zenodo.10652326" target="_blank" rel="noopener">
             <img src="image/logo/site_logo/Zenod.svg" alt="Zenodo logo" class="project-logo" />
@@ -732,11 +736,38 @@ Beyond his research, Micheal is passionate about science education and community
       </div>
     </section>
 
+
+    <section id="outreach">
+      <h2>Outreach &amp; Community Engagement</h2>
+
+       <!-- Card 1 -->
+      <h3>Pint of Science</h3>
+      <div class="project-card">
+        <a href="https://pintofscience.us" target="_blank" rel="noopener" class="project-link">
+          <img src="image/logo/site_logo/PoS.svg" alt="Pint of Science logo" class="pint-of-science-icon" style="width:150px; height:auto;" />
+        </a>
+
+         <div class="project-content">
+            Pint of Science is a global science festival that brings researchers to local pubs and cafes to share their work with the public in an engaging way. I co-Event Managed in Houston, Texas, making science accessible and fun for everyone.
+         </div>
+      </div>
+    </section>
+
+
+    
+
     <!-- CONTACT -->
     <section id="contact">
       <h2>Contact</h2>
-      <p><strong>Office:</strong> Science &amp; Research Building, 3507 Cullen Blvd, Room 629‑A, Houston, TX 77204, USA</p>
-      <p><strong>Email:</strong> <a href="mailto:kahangirwem@gmail.com">kahangirwem@gmail.com</a> | <a href="mailto:mkahangi@central.uh.edu">mkahangi@central.uh.edu</a></p>
+      <p> 
+        <strong><img src="image/logo/site_logo/location.svg" alt="Location icon" style="width: 2em; vertical-align: middle; margin-right: 0.4em;" /></strong>
+      <a> Science &amp; Research Building, 3507 Cullen Blvd, Room 629‑A, Houston, TX 77204, USA</a>
+      </p>
+      <p>
+        <strong><img src="image/logo/site_logo/email.svg" alt="Email icon" style="width: 2em; vertical-align: middle; margin-right: 0.4em;" /></strong>
+        <a href="mailto:kahangirwem@gmail.com">kahangirwem@gmail.com</a> |
+        <a href="mailto:mkahangi@central.uh.edu">mkahangi@central.uh.edu</a>
+      </p>
       <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/micheal-kahangirwe-ba4186129" target="_blank" rel="noopener">micheal-kahangirwe-ba4186129</a></p>
       <p><strong>ORCID:</strong> <a href="https://orcid.org/0000-0001-9144-6240" target="_blank" rel="noopener">0000-0001-9144-6240</a></p>
       <div class="map-container">
@@ -839,23 +870,29 @@ Beyond his research, Micheal is passionate about science education and community
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     })();
 
-    /* Scroll spy */
-    (function(){
-      const sections = document.querySelectorAll('main section[id]');
-      const navLinks = document.querySelectorAll('header nav a[href^="#"]');
-      const opts = { rootMargin: '-40% 0px -55% 0px', threshold: 0 };
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          const id = entry.target.id;
-          const link = document.querySelector(`header nav a[href="#${id}"]`);
-          if (entry.isIntersecting) {
-            navLinks.forEach(a => a.classList.remove('active'));
-            if (link) link.classList.add('active');
-          }
-        });
-      }, opts);
-      sections.forEach(sec => observer.observe(sec));
-    })();
+
+
+
+    /* Improved Scroll Spy */
+(function(){
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+  const opts = { rootMargin: '-25% 0px -60% 0px', threshold: 0 };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = document.querySelector(`header nav a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
+    });
+  }, opts);
+
+  sections.forEach(sec => observer.observe(sec));
+})();
+
   </script>
 </body>
 </html>
