@@ -293,6 +293,67 @@
       vertical-align: middle;
       margin-right: 0.4em;
     }
+
+
+/* Card layout (adjust if you already have styles) */
+  #outreach { margin-block: 2rem; }
+  .project-card { display:flex; align-items:flex-start; gap:1rem; flex-wrap:wrap; }
+  .project-content { flex:1 1 420px; min-width:280px; }
+
+  /* Compact in-card gallery */
+  #pos-gallery.outreach-gallery{
+    position: relative;
+    width: 100%;
+    max-width: 640px;   /* keeps it nicely inside the card */
+    aspect-ratio: 16 / 9;
+    margin: 0.75rem 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #0b0b0b;
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  }
+  #pos-gallery .outreach-viewport{
+    position: relative;
+    width: 100%; height: 100%;
+  }
+  #pos-gallery .outreach-slide{
+    position: absolute; inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+  @media (prefers-reduced-motion: reduce){
+    #pos-gallery .outreach-slide{ transition: none; }
+  }
+  #pos-gallery .outreach-slide.is-active{ opacity: 1; }
+  #pos-gallery img{
+    width: 100%; height: 100%; object-fit: cover; display:block;
+  }
+  #pos-gallery figcaption{
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: .5rem .75rem;
+    font-size: .9rem; color: #fff;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.7) 100%);
+  }
+
+  #pos-gallery .outreach-btn{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border: 0; border-radius: 999px;
+    background: rgba(255,255,255,.9); color:#111; cursor:pointer;
+  }
+  #pos-gallery .outreach-btn.prev{ left: .5rem; }
+  #pos-gallery .outreach-btn.next{ right: .5rem; }
+
+  #pos-gallery .outreach-dots{
+    position: absolute; left:50%; bottom:.35rem; transform:translateX(-50%);
+    display:flex; gap:.35rem; padding:.2rem .4rem; border-radius:999px;
+    background: rgba(0,0,0,.35);
+  }
+  #pos-gallery .outreach-dots button{
+    width:10px; height:10px; border-radius:999px; border:0; background:rgba(255,255,255,.65); cursor:pointer;
+  }
+  #pos-gallery .outreach-dots button[aria-selected="true"]{ background:#fff; width:18px; }
+
   </style>
 </head>
 <body>
@@ -676,17 +737,27 @@ Beyond his research, Micheal is passionate about science education and community
         <div class="card">
           <h3>Graduate Teaching Assistant</h3>
           <p>University of Houston (Jan 2021 – Present)</p>
-          <p>Led lab sessions, graded assignments, tutored students, and provided research guidance.</p>
+          <ul>
+            <li>PHYS 6366 - Quantum Field Theory <a href="https://publications.uh.edu/preview_course_nopop.php?catoid=50&coid=261261" target="_blank" rel="noopener">Quantum Field Theory</a></li>
+            <li>PHYS 1101 -  College Physics I (lab) <a href="https://publications.uh.edu/preview_course_nopop.php?catoid=49&coid=253937" target="_blank" rel="noopener">College Physics I</a></li>
+            <li>PHYS 2125 -  University Physics Laboratory I (lab) <a href="https://publications.uh.edu/preview_course_nopop.php?catoid=44&coid=212742" target="_blank" rel="noopener">University Physics I</a></li>
+          </ul>
         </div>
         <div class="card">
           <h3>Teaching Assistant</h3>
           <p>Makerere University (Aug 2017 – Aug 2018)</p>
-          <p>Instructed undergraduates, conducted office hours, and supported academic activities.</p>
+          <ul>
+            <li>PHY 7102 -  Classical Mechanics I <a href="https://courses.mak.ac.ug/courses/classical-mechanics-i-2" target="_blank" rel="noopener">Classical Mechanics I</a></li>
+
+            <li>PHY 1205 -  Electricity and Magnetism <a href="https://courses.mak.ac.ug/courses/electricity-and-magnetism-2" target="_blank" rel="noopener">Electricity and Magnetism</a></li>
+
+            <li>PHY 2105 -  Electromagnetism <a href="https://courses.mak.ac.ug/courses/electromagnetism#:~:text=Course%20Description%20%26%20Objectives%3A,Maxwell's%20equations%20and%20their%20applications." target="_blank" rel="noopener">Electromagnetism</a></li>
+          </ul>
         </div>
         <div class="card">
           <h3>Physics &amp; Mathematics Teacher</h3>
-          <p>Kisubi School, Uganda (Feb 2018 – Aug 2018)</p>
-          <p>Designed and delivered lesson plans, supervised labs, and promoted critical thinking.</p>
+          <p><a href="https://kisubischools.ac.ug/g" target="_blank" rel="noopener">Kisubi School, Uganda</a> (Feb 2018 – Aug 2018)</p>
+           <li>Physics and Mathematics Teacher, Ordinary and Advanced level</li>
         </div>
       </div>
     </section>
@@ -736,12 +807,66 @@ Beyond his research, Micheal is passionate about science education and community
       </div>
     </section>
 
+<section id="outreach">
+  <h2>Outreach &amp; Community Engagement</h2>
 
-    <section id="outreach">
+  <!-- Pint of Science Card -->
+  <h3>Pint of Science</h3>
+  <div class="project-card">
+    <a href="https://pintofscience.us" target="_blank" rel="noopener" class="project-link">
+      <img src="image/logo/site_logo/PoS.svg" alt="Pint of Science logo"
+           class="pint-of-science-icon" style="width:150px; height:auto;" />
+    </a>
+
+    <div class="project-content">
+      Pint of Science is a global science festival that brings researchers to local pubs and cafes to share their work with the public in an engaging way. I co-event managed the 2025 Houston, Texas chapter festival, helping to make science accessible and enjoyable for everyone.
+
+      <!-- Outreach Slideshow inside the card -->
+<!-- Pint of Science slideshow INSIDE the card -->
+    <div id="pos-gallery" class="outreach-gallery" role="region" aria-label="Pint of Science photos">
+      <div class="outreach-track">
+        <figure class="outreach-slide">
+          <img loading="lazy" src="image/outreach/committee.jpg"
+              alt="Introducing speakers at Pint of Science Houston"
+              data-caption=" Pint of Science Houston 2025 organizers">
+          <figcaption></figcaption>
+        </figure>
+        <figure class="outreach-slide">
+          <img loading="lazy" src="image/outreach/crowd.jpg"
+              alt="Explaining particle interactions during a school visit"
+              data-caption="interactive crowd">
+          <figcaption></figcaption>
+        </figure>
+        <figure class="outreach-slide">
+          <img loading="lazy" src="image/outreach/crowd1.JPG"
+              alt="interactive crowd"
+              data-caption="Community panel: science &amp; society Q&amp;A">
+          <figcaption></figcaption>
+        </figure>
+      </div>
+
+      <button class="outreach-btn prev" aria-label="Previous slide" type="button">&#10094;</button>
+      <button class="outreach-btn next" aria-label="Next slide" type="button">&#10095;</button>
+      <div class="outreach-dots" role="tablist" aria-label="Slide navigation"></div>
+    </div>
+
+        <!-- Controls -->
+        <button class="outreach-btn prev" aria-label="Previous slide">&#10094;</button>
+        <button class="outreach-btn next" aria-label="Next slide">&#10095;</button>
+
+        <!-- Dots -->
+        <div class="outreach-dots" role="tablist" aria-label="Slide navigation"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- <section id="outreach">
       <h2>Outreach &amp; Community Engagement</h2>
 
        <!-- Card 1 -->
-      <h3>Pint of Science</h3>
+      <!-- <h3>Pint of Science</h3>
       <div class="project-card">
         <a href="https://pintofscience.us" target="_blank" rel="noopener" class="project-link">
           <img src="image/logo/site_logo/PoS.svg" alt="Pint of Science logo" class="pint-of-science-icon" style="width:150px; height:auto;" />
@@ -751,7 +876,7 @@ Beyond his research, Micheal is passionate about science education and community
             Pint of Science is a global science festival that brings researchers to local pubs and cafes to share their work with the public in an engaging way. I co-event managed the 2025 Houston, Texas chapter festival, helping to make science accessible and enjoyable for everyone.
          </div>
       </div>
-    </section>
+    </section> --> -->
 
 
 
@@ -897,6 +1022,78 @@ Beyond his research, Micheal is passionate about science education and community
   sections.forEach(sec => observer.observe(sec));
 })();
 
-  </script>
+(function initPOSGallery(){
+    function ready(fn){ document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+    ready(() => {
+      const root = document.getElementById('pos-gallery');
+      if(!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.outreach-slide'));
+      const dotsWrap = root.querySelector('.outreach-dots');
+      const prevBtn = root.querySelector('.outreach-btn.prev');
+      const nextBtn = root.querySelector('.outreach-btn.next');
+      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Set captions
+      slides.forEach(s => {
+        const img = s.querySelector('img');
+        const cap = s.querySelector('figcaption');
+        if (img && cap) cap.textContent = img.dataset.caption || img.alt || '';
+      });
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', `Go to slide ${i+1}`);
+        b.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(b);
+      });
+
+      let index = 0, timer = null;
+
+      function updateUI(){
+        slides.forEach((s,i)=> s.classList.toggle('is-active', i===index));
+        dotsWrap.querySelectorAll('button').forEach((b,i)=> b.setAttribute('aria-selected', i===index ? 'true':'false'));
+      }
+      function goTo(i, user=false){
+        index = (i + slides.length) % slides.length;
+        updateUI();
+        if (user) restart();
+      }
+      function next(){ goTo(index + 1); }
+      function prev(){ goTo(index - 1); }
+
+      function start(){ if(!motionOK) return; stop(); timer = setInterval(next, 4500); }
+      function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+      function restart(){ stop(); start(); }
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('focusout', start);
+      prevBtn.addEventListener('click', () => goTo(index-1, true));
+      nextBtn.addEventListener('click', () => goTo(index+1, true));
+      root.addEventListener('keydown', (e)=> {
+        if(e.key === 'ArrowLeft'){ e.preventDefault(); prev(); }
+        if(e.key === 'ArrowRight'){ e.preventDefault(); next(); }
+      });
+
+      // Init
+      updateUI();
+      start();
+    });
+  })();
+</script>
+
+<noscript>
+  <style>
+    /* JS off: show first image */
+    #pos-gallery .outreach-slide{ position:static; opacity:1; }
+    #pos-gallery .outreach-slide:not(:first-child), #pos-gallery .outreach-btn, #pos-gallery .outreach-dots{ display:none!important; }
+  </style>
+</noscript>
+
 </body>
 </html>
